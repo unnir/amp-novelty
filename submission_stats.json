@@ -1,0 +1,18 @@
+{
+ "seed": 42,
+ "n_library": 50000,
+ "n_unique": 50000,
+ "len_min": 8,
+ "len_max": 48,
+ "len_median": 21,
+ "top_max_identity": 70.0,
+ "seconds": 0.061592817306518555,
+ "pool_factor": 4.0,
+ "max_ref_identity": 78.0,
+ "max_pair_identity": 70.0,
+ "top_max_ref_identity": 70.0,
+ "top_max_pair_identity": 55.0,
+ "mix_grpo": 0.6,
+ "mix_sft": 0.3,
+ "mix_pretrain": 0.1
+}

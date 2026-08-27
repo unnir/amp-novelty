@@ -1,0 +1,49 @@
+[project]
+name = "amp-novelty"
+version = "1.0.0"
+description = "Conditional peptide language model with consensus-reward GRPO for de novo AMP design"
+readme = "README.md"
+# 3.11 exactly, matching .python-version and the interpreter the reproduction was verified on.
+# ">=3.10" was not a harmless wider net: uv resolves against EVERY version in the range, and
+# numpy 2.4.6 has no 3.10 wheel, so the whole lock became unsatisfiable and `uv sync` refused to
+# install anything at all.
+requires-python = ">=3.11,<3.12"
+license = { text = "MIT" }
+# PINNED, not floored. The clean-room install resolved "torch>=2.2" to torch 2.13.0 while the
+# library was generated and verified under 2.4.1 -- a different kernel set, different reduction
+# orders, and no reason to expect the same floats. A byte-identical requirement cannot be met by
+# a dependency range: the organizers must install what this was built with.
+dependencies = [
+    "numpy==2.4.6",
+    "torch==2.4.1",
+    "rapidfuzz==3.14.5",
+    "scikit-learn==1.9.0",
+    "scipy==1.17.1",
+    "fair-esm==2.0.0",
+]
+
+[project.scripts]
+generate = "amp_novelty.generate:main"
+
+# Pin the CUDA BUILD, not just the torch version.
+#
+# A clean-room reproduction with torch==2.4.1 resolved to the +cu121 wheel while this library was
+# generated under +cu124. Same version, different kernels. The run was otherwise identical -- the
+# greedy coverage initialisation reached 3899/4000 on both machines, so the pool, the embeddings
+# and the seeded subsample all matched -- and the final libraries still differed, because
+# thousands of swap accept/reject decisions turn on float comparisons that the two kernel sets do
+# not compute bit-identically.
+#
+# `torch==2.4.1` alone does not select a CUDA build; PyPI serves whichever wheel the resolver
+# picks. This forces the one the artifacts were produced with.
+[[tool.uv.index]]
+name = "pytorch-cu124"
+url = "https://download.pytorch.org/whl/cu124"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu124" }
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"

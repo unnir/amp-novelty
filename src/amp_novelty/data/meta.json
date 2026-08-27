@@ -1,0 +1,23 @@
+{
+ "built": "prepare_data.py",
+ "n_reference_antibacterial": 39448,
+ "n_marlys_valid": 47411,
+ "n_grampa": 4319,
+ "sources": {
+  "antibacterial.fasta": "github.com/szczurek-lab/amp-challenge-2027 (challenge reference set)",
+  "MLAMP_db.json": "MarLys AMP database, doi:10.17632/w4hb5grjwb.3 (CC-0)",
+  "grampa_mic": "GRAMPA via hydramp-starter-kit/data/training/mic_data.csv",
+  "veltri": "AMP Scanner v2 training set via hydramp-starter-kit",
+  "uniprot": "UniProt negatives via hydramp-starter-kit",
+  "exp_ampdiffusion_mic": "de la Fuente lab MICs, Torres et al. Cell Biomaterials 2025",
+  "exp_hydramp": "Szymczak et al. Nat Commun 2023 + unpublished follow-up",
+  "baseline_hydramp_library": "official challenge baseline library (50k)",
+  "pretrain_ampsphere.json.gz": "AMPSphere v.2022-03 metagenomic small-ORF peptides (CC-BY 4.0) \u2014 LM pretraining stage 2",
+  "pretrain_amp.json.gz": "curated AMP pretraining corpus (MarLys-derived) \u2014 LM pretraining stage 1, AMP half",
+  "pretrain_background.json.gz": "UniParc/UniProt generic peptide background \u2014 LM pretraining stage 1, background half"
+ },
+ "n_ampsphere": 836966,
+ "n_pretrain_amp": 47415,
+ "n_pretrain_background": 2000000,
+ "disclosure_note": "Training-data disclosure. Every corpus the language model sees at any stage is listed here, including the pretraining stages, which the README's abstract also names."
+}

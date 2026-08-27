@@ -1,0 +1,12 @@
+# Git LFS. Model weights and canonical prediction caches exceed GitHub's 100 MB per-file limit:
+# oracle_ft_150M.pt is 566 MB, three LM checkpoints are 145 MB each, and the shipped ESM-2
+# embedding cache is 273 MB. This matches the organisers' own ampdiffusion-starter-kit, which
+# ships its checkpoint and APEX weights the same way and instructs users to run `git lfs pull`.
+#
+# GitHub Free/Pro allows 10 GB LFS storage and 10 GB bandwidth per month; this repository uses
+# about 1.4 GB and roughly one clone, so it costs nothing.
+*.pt      filter=lfs diff=lfs merge=lfs -text
+*.pth     filter=lfs diff=lfs merge=lfs -text
+*.pkl     filter=lfs diff=lfs merge=lfs -text
+*.npy     filter=lfs diff=lfs merge=lfs -text
+*.json.gz filter=lfs diff=lfs merge=lfs -text
